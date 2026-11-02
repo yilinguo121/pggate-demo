@@ -11,3 +11,5 @@ jobs:
       - uses: yilinguo121/pggate/action@main
         with:
           profile: scale
+          # base 預設是 PR 的 base 分支（--base diff gate：只擋這個 PR 新增的 finding）；要有 Guard key 才會跑 diff
+          license-key: ${{ secrets.PGGATE_LICENSE_KEY }}
