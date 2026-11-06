@@ -8,8 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: yilinguo121/pggate/action@main
+      - uses: yilinguo121/pggate-action@v0.1.0
         with:
           profile: scale
-          # base 預設是 PR 的 base 分支（--base diff gate：只擋這個 PR 新增的 finding）；要有 Guard key 才會跑 diff
+          # 只擋這個 PR 新增的 finding（--base diff gate）要 Guard key：設 PGGATE_LICENSE_KEY 之後再加 base: ${{ github.base_ref }}；
+          # 沒有 key 時不要設 base（會變成 LICENSE_REQUIRED、exit 2）。現在沒有 key，所以每個 fail finding 都擋。
           license-key: ${{ secrets.PGGATE_LICENSE_KEY }}
